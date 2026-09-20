@@ -211,7 +211,7 @@ function createEnemy() {
   if (!gameRunning) return;
 
   const enemy = document.createElement("div");
-  enemy.classList.add("enemy");
+  enemy.classList.add("enemy", "car");
   
   // Random lane positioning
   const lanes = [20, 135, 250]; // Left, center, right approx
