@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neon Racer</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div id="gameContainer">
+  <!-- Start Screen -->
+  <div id="startScreen" class="overlay-screen">
+    <div class="glass-panel">
+      <h1>Neon Racer</h1>
+      <p>Use ⬅️ ➡️ Arrow Keys</p>
+      <button id="startBtn" class="action-btn">Start Engine</button>
+      <div class="audio-toggle-container">
+        <label><input type="checkbox" id="muteToggle"> Mute Sound</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Game Over Screen -->
+  <div id="gameOverScreen" class="overlay-screen hide">
+    <div class="glass-panel">
+      <h2>Game Over</h2>
+      <p id="finalScoreDisplay">Score: 0</p>
+      <button id="restartBtn" class="action-btn">Play Again</button>
+    </div>
+  </div>
+
+  <!-- Game Area -->
+  <div id="gameArea" class="hide">
+    <div class="road">
+      <div class="lines"></div>
+      <div class="lines"></div>
+      <div class="lines"></div>
+    </div>
+    
+    <!-- HUD -->
+    <div id="hud">
+      <div class="hud-item" id="scoreDisplay">Score: 0</div>
+      <div class="hud-item" id="levelDisplay">Level: 1</div>
+      <div class="hud-item" id="speedDisplay">Speed: 0 km/h</div>
+    </div>
+
+    <!-- Entities -->
+    <div id="player" class="car player-car"></div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

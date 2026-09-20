@@ -1,0 +1,213 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background: #0f0c29;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #24243e, #302b63, #0f0c29);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #24243e, #302b63, #0f0c29); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+  color: #fff;
+}
+
+#gameContainer {
+  position: relative;
+  width: 320px;
+  height: 550px;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(99, 102, 241, 0.5);
+  overflow: hidden;
+}
+
+#gameArea {
+  width: 100%;
+  height: 100%;
+  background: #2a2a35;
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+/* Road and Parallax */
+.road {
+  width: 100%;
+  height: 200%;
+  background: #333;
+  position: absolute;
+  top: -100%;
+  left: 0;
+  border-left: 10px solid #555;
+  border-right: 10px solid #555;
+}
+
+.road.animated {
+  animation: scrollRoad linear infinite;
+}
+
+.lines {
+  width: 10px;
+  height: 100px;
+  background: rgba(255, 255, 255, 0.8);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.lines:nth-child(1) { top: 10%; }
+.lines:nth-child(2) { top: 50%; }
+.lines:nth-child(3) { top: 90%; }
+
+@keyframes scrollRoad {
+  0% { top: -100%; }
+  100% { top: 0; }
+}
+
+/* UI Screens */
+.overlay-screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 12, 41, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  backdrop-filter: blur(5px);
+  border-radius: 12px;
+}
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 30px 20px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  text-align: center;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  width: 80%;
+}
+
+.glass-panel h1, .glass-panel h2 {
+  margin-bottom: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  background: -webkit-linear-gradient(#00f2fe, #4facfe);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.glass-panel p {
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: #ccc;
+}
+
+.action-btn {
+  background: linear-gradient(45deg, #4facfe, #00f2fe);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 25px;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 15px rgba(0, 242, 254, 0.4);
+}
+
+.action-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 242, 254, 0.6);
+}
+
+.audio-toggle-container {
+  margin-top: 15px;
+  font-size: 12px;
+  color: #aaa;
+}
+
+/* HUD */
+#hud {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.hud-item {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#speedDisplay { margin-top: 5px; }
+
+/* Entities */
+.car {
+  width: 50px;
+  height: 90px;
+  position: absolute;
+  border-radius: 8px;
+  background-size: cover;
+  background-position: center;
+}
+
+.player-car {
+  bottom: 20px;
+  /* SVG Sports Car - Cyan */
+  background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 50 90" xmlns="http://www.w3.org/2000/svg"><path d="M10 20 L15 5 L35 5 L40 20 L45 80 L5 80 Z" fill="%2300f2fe"/><rect x="15" y="25" width="20" height="20" fill="%23111" rx="2"/><rect x="15" y="60" width="20" height="15" fill="%23111" rx="2"/><path d="M12 25 L12 45 M38 25 L38 45" stroke="%230ff" stroke-width="2"/></svg>');
+  box-shadow: 0 0 15px rgba(0, 242, 254, 0.6);
+  transition: left 0.15s cubic-bezier(0.2, 0.8, 0.2, 1);
+  z-index: 5;
+}
+
+.enemy {
+  top: -100px;
+  /* SVG Sports Car - Red/Orange */
+  background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 50 90" xmlns="http://www.w3.org/2000/svg"><path d="M10 20 L15 5 L35 5 L40 20 L45 80 L5 80 Z" fill="%23ff416c"/><rect x="15" y="25" width="20" height="20" fill="%23111" rx="2"/><rect x="15" y="60" width="20" height="15" fill="%23111" rx="2"/><path d="M12 25 L12 45 M38 25 L38 45" stroke="%23ff4b2b" stroke-width="2"/></svg>');
+  transform: rotate(180deg);
+  box-shadow: 0 0 10px rgba(255, 65, 108, 0.5);
+  z-index: 4;
+}
+
+/* Utilities */
+.hide {
+  display: none !important;
+}
+
+/* Effects */
+.shake {
+  animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+@keyframes shake {
+  10%, 90% { transform: translate3d(-2px, 0, 0); }
+  20%, 80% { transform: translate3d(4px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-8px, 0, 0); }
+  40%, 60% { transform: translate3d(8px, 0, 0); }
+}
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 3;
+}
